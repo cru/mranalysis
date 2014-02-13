@@ -10,12 +10,15 @@ mr = MapReduce.MapReduce()
 # =============================
 # Do not modify above this line
 
-n = 4
+n = open(sys.argv[1]) 
+lc = 0
+for line in n:
+	lc += 1
 
 def mapper(record):
 	# key: position in nxn matrix
 	# value: row
-	for i in range(1, n+1):
+	for i in range(1, lc+1):
 		for j in range(len(record[1])):
 			mr.emit_intermediate((record[0], i), ("a", record[0], j, record[1][j]))
 			mr.emit_intermediate((i, record[0]), ("b", j, record[0], record[1][j]))
@@ -37,5 +40,5 @@ def reducer(key, list_of_values):
 # Do not modify below this line
 # =============================
 if __name__ == '__main__':
-	inputdata = open('data/wide_data.json')
+	inputdata = open(sys.argv[1])
 	mr.execute(inputdata, mapper, reducer)
