@@ -38,7 +38,7 @@ def reducer(key, list_of_values):
 	for ra in a:
 		for rb in b:
 			if ra[2] == rb[1]:
-				sum += int(ra[3]) * int(rb[3]); 
+				sum += ra[3] * rb[3]; 
 	mr.emit((key[0], key[1], sum))
 
 # Do not modify below this line
