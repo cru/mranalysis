@@ -24,8 +24,8 @@ def mapper(record):
 	mean = float(sum)/len(record[1])
 	for i in range(1, lc+1):
 		for j in range(len(record[1])):
-			mr.emit_intermediate((record[0], i), ("a", record[0], j, record[1][j], mean))
-			mr.emit_intermediate((i, record[0]), ("b", j, record[0], record[1][j], mean))
+			mr.emit_intermediate((record[0], i), ("a", record[0], j, int(record[1][j]) - mean))
+			mr.emit_intermediate((i, record[0]), ("b", j, record[0], int(record[1][j]) - mean))
 
 def reducer(key, list_of_values):
 	# key: position on nxn matrix
@@ -38,7 +38,7 @@ def reducer(key, list_of_values):
 	for ra in a:
 		for rb in b:
 			if ra[2] == rb[1]:
-				sum += (int(ra[3])-ra[4]) * (int(rb[3])-rb[4]); 
+				sum += int(ra[3]) * int(rb[3]); 
 	mr.emit((key[0], key[1], sum))
 
 # Do not modify below this line
