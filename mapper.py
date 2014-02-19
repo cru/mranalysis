@@ -4,8 +4,8 @@ import json
 import sys
 
 dataFile = open('data/wide_data.json')
-rc = 2
 
+lc = 0
 for line in dataFile:
 #for line in sys.stdin:
 
