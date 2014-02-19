@@ -10,7 +10,7 @@ mr = MapReduce.MapReduce()
 # =============================
 # Do not modify above this line
 
-n = open(sys.argv[1]) 
+n = open('data/wide_data.json') 
 lc = 0
 for line in n:
 	lc += 1
@@ -44,5 +44,5 @@ def reducer(key, list_of_values):
 # Do not modify below this line
 # =============================
 if __name__ == '__main__':
-	inputdata = open(sys.argv[1])
+	inputdata = open('data/wide_data.json')
 	mr.execute(inputdata, mapper, reducer)

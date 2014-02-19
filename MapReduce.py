@@ -14,7 +14,7 @@ class MapReduce:
 
     def execute(self, data, mapper, reducer):
         for line in data:
-            record = json.loads(line)
+            record = eval(line)
             mapper(record)
 
         for key in self.intermediate:

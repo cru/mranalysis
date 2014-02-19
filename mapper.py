@@ -3,26 +3,27 @@
 import json
 import sys
 
-file = open('data/wide_data.json')
-for line in file:
+dataFile = open('data/wide_data.json')
+rc = 2
+
+for line in dataFile:
 #for line in sys.stdin:
     try:
+
         record = json.loads(line)
-        id = record[0]
         data = record[1]
-        lc = len(data)
+        mc = len(data)
         # key: position in nxn matrix
         # value: row
         totalExpression = 0
         for j in data:
             totalExpression += int(j)
-        #print totalExpression
         mean = float(totalExpression)/len(data)
-        #print mean
-        for i in range(1, lc+1):
-            for j in range(len(record[1])):
-                print "%s\t%s\t%s\t%s\t%s" % ('a', record[0], i, j, str(int(record[1][j]) - mean))
-                print "%s\t%s\t%s\t%s\t%s" % ('b', i, record[0], j, str(int(record[1][j]) - mean))
+        
+        for i in range(rc+1):
+            for j in range(mc+1):
+                print "(%s,%s)\t(%s,%s,%s,%s)" % (record[0], j+1, "'a'", record[0], j+1, int(record[1][j]) )
+                print "(%s,%s)\t(%s,%s,%s,%s)" % (j+1, record[0], "'b'", j+1, record[0], int(record[1][j]) )
 
     except:
         pass
